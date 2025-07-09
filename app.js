@@ -2,6 +2,15 @@ const btnCreate = document.getElementById('btn-main')
 const btnToggle = document.querySelector('.btn-toggle')
 const btnRemove = document.querySelector('.btn-remove')
 const taskList = document.querySelector('.list-container ul')
+//grab all items in list
+const listItems = document.getElementsByTagName('li')
+
+//run over all list items on mouseover - does not work correctly when adding new items
+for (let i = 0; i < listItems.length; i++) {
+  listItems[i].addEventListener('mouseover', () => {
+    listItems[i].textContent = listItems[i].textContent.toUpperCase()
+  })
+}
 
 btnToggle.addEventListener('click', () => {
   const listContainer = document.querySelector('.list-container')
