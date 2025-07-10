@@ -2,15 +2,14 @@ const btnCreate = document.getElementById('btn-main')
 const btnToggle = document.querySelector('.btn-toggle')
 const btnRemove = document.querySelector('.btn-remove')
 const taskList = document.querySelector('.list-container ul')
-//grab all items in list
-const listItems = document.getElementsByTagName('li')
+const input = document.querySelector('.input-main')
 
-//run over all list items on mouseover - does not work correctly when adding new items
-for (let i = 0; i < listItems.length; i++) {
-  listItems[i].addEventListener('mouseover', () => {
-    listItems[i].textContent = listItems[i].textContent.toUpperCase()
-  })
-}
+//target taskList instead of listItems so we don't need to iterate over them, and each item responds as expected
+taskList.addEventListener('mouseover', (evt) => {
+  if (evt.target.tagName === 'LI') {
+    evt.target.textContent = evt.target.textContent.toUpperCase()
+  }
+})
 
 btnToggle.addEventListener('click', () => {
   const listContainer = document.querySelector('.list-container')
@@ -24,7 +23,6 @@ btnToggle.addEventListener('click', () => {
 })
 
 btnCreate.addEventListener('click', () => {
-  const input = document.querySelector('.input-main')
   const list = document.querySelector('ul')
   list.insertAdjacentHTML('afterbegin', `<li>${input.value}</i>`)
   input.value = ''
@@ -33,4 +31,11 @@ btnCreate.addEventListener('click', () => {
 btnRemove.addEventListener('click', () => {
   const li = document.querySelector('li:last-child')
   li.remove()
+})
+
+input.addEventListener('keypress', (evt) => {
+  if (evt.key === 'Enter') {
+    evt.preventDefault()
+    btnCreate.click()
+  }
 })
