@@ -17,12 +17,14 @@ for (let i = 0; i < listItems.length; i++) {
   attachRemoveButton(listItems[i])
 }
 
-//target taskList instead of listItems so we don't need to iterate over them, and each item responds as expected
-/* taskList.addEventListener('mouseover', (evt) => {
-  if (evt.target.tagName === 'LI') {
-    evt.target.textContent = evt.target.textContent.toUpperCase()
+//target taskList instead of listItems so we don't need to iterate over them, and each item responds as expected - then change toUpperCase to remove on button click
+taskList.addEventListener('click', (evt) => {
+  if (evt.target.tagName === 'BUTTON') {
+    const button = evt.target
+    const li = button.parentNode
+    li.remove()
   }
-}) */
+})
 
 btnToggle.addEventListener('click', () => {
   const listContainer = document.querySelector('.list-container')
@@ -44,11 +46,6 @@ btnCreate.addEventListener('click', () => {
     `<li>${input.value}<button class="remove">Remove</button></li>`
   )
   input.value = ''
-})
-
-btnRemove.addEventListener('click', () => {
-  const li = document.querySelector('li:last-child')
-  li.remove()
 })
 
 input.addEventListener('keypress', (evt) => {
